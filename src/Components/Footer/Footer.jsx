@@ -1,5 +1,5 @@
 import React from "react";
-import FacebookIcon from '@mui/icons-material/Facebook';
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import "./footer.css";
@@ -10,7 +10,7 @@ function Footer() {
       <div className="footer_inner_container">
        
         <div className="footer_icons">
-          <FacebookIcon />
+          <FacebookOutlinedIcon />
           <InstagramIcon />
           <YouTubeIcon/>
         </div>
@@ -41,8 +41,8 @@ function Footer() {
 
         {/* Service Code & Copyright */}
         <div className="service-code">
-          <p>
-          Service Code
+            <p>
+              Service Code
             </p>
         </div>
             <div className="copy-write">
