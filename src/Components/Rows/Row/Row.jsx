@@ -4,26 +4,19 @@ import axios from '../../../Utils/axios';
 import movieTrailer from  "movie-trailer"
 import YouTube from 'react-youtube';
 
-
-
 const Row = ({title, fetchUrl, isLargeRow}) => {
     const [movies, setMovie] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
     const base_url = "https://image.tmdb.org/t/p/original";
-
     useEffect(() => {
       (async () => {
           try{
-            console.log(fetchUrl);
             const request = await axios.get(fetchUrl)
-            console.log(request);
             setMovie(request.data.results)
           }catch (error){
           console.log("error", error);
         }
-
       }) ()
-
     },[fetchUrl]);
 
     const handleClick = (movie) =>{
@@ -32,9 +25,7 @@ const Row = ({title, fetchUrl, isLargeRow}) => {
         }else{
             movieTrailer(movie?.title || movie?.name || movie?.original_name)
             .then((url) => {
-                console.log(url);
                 const urlParams = new URLSearchParams(new URL(url).search)
-                console.log(urlParams);
                 console.log(urlParams.get('v'));
                 setTrailerUrl(urlParams.get('v'));
             })
@@ -52,11 +43,12 @@ const Row = ({title, fetchUrl, isLargeRow}) => {
   return (
     <div className='row'>
       <h4>{title}</h4>
-      <div className='row__posters'> 
+      <div className='row__posters'>
         {movies?.map((movie, index) => (
-            <img 
+            <img
              onClick={() => handleClick(movie)}
-             key={index} src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name} className={`row__poster ${isLargeRow && "row__posterLarge"}`} 
+             key={index} src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name || "Movie Poster"} className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+             onError={(e) => (e.target.style.display = "none")}
              />
         ))}
       </div>
@@ -69,3 +61,4 @@ const Row = ({title, fetchUrl, isLargeRow}) => {
 }
 
 export default Row
+
